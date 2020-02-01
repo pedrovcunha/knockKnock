@@ -1,7 +1,6 @@
 using System;
 using knockKnock.API.Services;
 using Xunit;
-using Xunit.Abstractions;
 
 // Naming Format: MethodName_ExpectedBehavior_StateUnderTest
 namespace KnockKnock.Tests
@@ -14,7 +13,7 @@ namespace KnockKnock.Tests
     public class KnockServiceTests : IClassFixture<KnockKnockFixture>, IDisposable
     {
         private readonly KnockKnockFixture _knockKnockFixture;
-        public KnockServiceTests(ITestOutputHelper testOutputHelper, KnockKnockFixture knockKnockFixture)
+        public KnockServiceTests(KnockKnockFixture knockKnockFixture)
         {
             _knockKnockFixture = knockKnockFixture;
         }
