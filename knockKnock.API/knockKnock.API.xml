@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>knockKnock.API</name>
+    </assembly>
+    <members>
+        <member name="M:knockKnock.API.Controllers.KnockController.GetFibonacciNumber(System.Int64)">
+            <summary>
+            Get the nth number in the fibonacci sequence.
+            </summary>
+            <param name="n">The index (n) of the fibonacci sequence</param>
+            <returns>Returns the nth Fibonacci number.</returns>
+        </member>
+        <member name="M:knockKnock.API.Controllers.KnockController.GetReverseWords(System.String)">
+            <summary>
+            Get the Reverse Words
+            </summary>
+            <param name="sentence">Sequence of characters to be reverse (Phrase/Sentence).</param>
+            <returns>Reverses the letters of each word in a sentence.</returns>
+        </member>
+        <member name="M:knockKnock.API.Controllers.KnockController.GetToken">
+            <summary>
+            Gets my personal token.
+            </summary>
+            <returns>My Token</returns>
+        </member>
+        <member name="M:knockKnock.API.Controllers.KnockController.GetTriangleType(System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Get the type of triangle given the lengths of its sides.
+            </summary>
+            <param name="a">The length of side a</param>
+            <param name="b">The length of side b</param>
+            <param name="c">The length of side c</param>
+            <returns>Returns the type of triangle given the lengths of its sides.</returns>
+        </member>
+    </members>
+</doc>
