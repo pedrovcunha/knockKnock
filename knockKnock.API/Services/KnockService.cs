@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace knockKnock.API.Services
 {
@@ -14,17 +15,17 @@ namespace knockKnock.API.Services
         }
 
         // First call always start n1 = 0, n2 = 1, counter = 1, 
-        public long SvrRecursiveFibonacci(long n1, long n2, long counter, long number)
+        public async Task<long> SvrRecursiveFibonacci(long n1, long n2, long counter, long number)
         {
             return number switch
             {
                 0 => 0,
                 1 => 1,
-                _ => counter < number ? SvrRecursiveFibonacci(n2, n1 + n2, counter++, number) : n2,
+                _ => counter < number ? await SvrRecursiveFibonacci(n2, n1 + n2, counter++, number) : n2,
             };
         }
 
-        public long SvrFibonacci(long index)
+        public Task<long> SvrFibonacci(long index)
         {
             if (index < 0)
             {
@@ -32,9 +33,9 @@ namespace knockKnock.API.Services
                     $"The Fibonacci sequence starts from zero onwards. Therefore the value of {index} is not acceptable.",
                     nameof(index));
             }
-                
+
             if (index == 0)
-                return 0;
+                return Task.FromResult<long>(0);
 
             long n1 = 0;
             long n2 = 1;
@@ -49,32 +50,32 @@ namespace knockKnock.API.Services
 
             } while (counter < index);
 
-            return n2;
+            return Task.FromResult<long>(n2);
         }
 
-        public string SvrReverseWord(string sentence)
+        public Task<string> SvrReverseWord(string sentence)
         {
             if (sentence == null)
                 throw new ArgumentNullException(nameof(sentence), "The sequence can not be null.");
 
-            return string.Join(" ", sentence.Split(' ').Select(s => new string(s.Reverse().ToArray())));
+            return Task.FromResult<string>(string.Join(" ", sentence.Split(' ').Select(s => new string(s.Reverse().ToArray()))));
         }
 
-        public TriangleType SrvTriangleType(int a, int b, int c)
+        public Task<TriangleType> SrvTriangleType(int a, int b, int c)
         {
             if (a + b <= c || a + c <= b || b + c <= a)
-                return TriangleType.NotATriangle;
+                return Task.FromResult<TriangleType>(TriangleType.NotATriangle);
             if (a == b && b == c)
-                return TriangleType.Equilateral;
+                return Task.FromResult<TriangleType>(TriangleType.Equilateral);
             if ((a == b && b != c) || (a != b && b == c))
-                return TriangleType.Isosceles;
+                return Task.FromResult<TriangleType>(TriangleType.Isosceles);
 
-            return TriangleType.Scalene;
+            return Task.FromResult<TriangleType>(TriangleType.Scalene);
         }
 
-        public string SrvToken()
+        public Task<string> SrvToken()
         {
-            return "e0a6432a-25b1-4a60-921e-23bd8c33f44d";
+            return Task.FromResult<string>("e0a6432a-25b1-4a60-921e-23bd8c33f44d");
         }
     }
 }

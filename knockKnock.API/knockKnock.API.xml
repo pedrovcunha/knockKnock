@@ -4,14 +4,14 @@
         <name>knockKnock.API</name>
     </assembly>
     <members>
-        <member name="M:knockKnock.API.Controllers.KnockController.GetFibonacciNumber(System.Int64)">
+        <member name="M:knockKnock.API.Controllers.KnockController.GetFibonacciNumberAsync(System.Int64)">
             <summary>
             Get the nth number in the fibonacci sequence.
             </summary>
             <param name="n">The index (n) of the fibonacci sequence</param>
             <returns>Returns the nth Fibonacci number.</returns>
         </member>
-        <member name="M:knockKnock.API.Controllers.KnockController.GetReverseWords(System.String)">
+        <member name="M:knockKnock.API.Controllers.KnockController.GetReverseWordsAsync(System.String)">
             <summary>
             Get the Reverse Words
             </summary>

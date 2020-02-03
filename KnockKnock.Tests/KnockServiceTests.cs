@@ -5,7 +5,7 @@ using Xunit;
 // Naming Format: MethodName_ExpectedBehavior_StateUnderTest
 namespace KnockKnock.Tests
 {
-    // Saves memory just instantiating the class once.
+    // "Fixtures" Saves memory just instantiating the class once.
     public class KnockKnockFixture
     {
         public KnockService KnockService => new KnockService();
@@ -25,13 +25,13 @@ namespace KnockKnock.Tests
         [InlineData(3, 2)]
         [InlineData(10, 55)]
         [Trait("Category", "Fibonacci - Recursive")]
-        public void SrvFibonacciRecursive_ReturnExpectedValue_WhenIndexIsInlineData(long index, long expected)
+        public async void SrvFibonacciRecursive_ReturnExpectedValue_WhenIndexIsInlineData(long index, long expected)
         {
             // Arrange
             var knockServices = _knockKnockFixture.KnockService;
 
             // Act
-            var result = knockServices.SvrRecursiveFibonacci(0, 1, 1, index);
+            var result = await knockServices.SvrRecursiveFibonacci(0, 1, 1, index);
 
             // Assert
             Assert.Equal(expected, result);
@@ -44,13 +44,13 @@ namespace KnockKnock.Tests
         [InlineData(3, 2)]
         [InlineData(10, 55)]
         [Trait("Category", "Fibonacci")]
-        public void SrvFibonacci_ReturnExpectedValue_WhenIndexIsInlineData(long index, long expected)
+        public async void SrvFibonacci_ReturnExpectedValue_WhenIndexIsInlineData(long index, long expected)
         {
             // Arrange
             var knockService = _knockKnockFixture.KnockService;
 
             // Act 
-            var result = knockService.SvrFibonacci(index);
+            var result = await knockService.SvrFibonacci(index);
 
             // Assert
             Assert.Equal(expected, result);
@@ -58,26 +58,26 @@ namespace KnockKnock.Tests
 
         [Fact]
         [Trait("Category", "Fibonacci")]
-        public void SrvFibonacci_ThrowArgumentException_WhenIndexIsNegative()
+        public async System.Threading.Tasks.Task SrvFibonacci_ThrowArgumentException_WhenIndexIsNegative()
         {
             // Arrange
             var knockService = _knockKnockFixture.KnockService;
 
             // Act & Assert
-            Assert.Throws<ArgumentException>(() => knockService.SvrFibonacci(long.MinValue));
+            await Assert.ThrowsAsync<ArgumentException>(() => knockService.SvrFibonacci(long.MinValue));
         }
 
         [Theory]
         [InlineData("Test01", "10tseT")]
         [InlineData("reverse the word", "esrever eht drow")]
         [Trait("Category", "Reverse Word")]
-        public void SvrReverseWord_ReturnExpectedValue_WhenIndexIsInlineData(string input, string expected)
+        public async void SvrReverseWord_ReturnExpectedValue_WhenIndexIsInlineData(string input, string expected)
         {
             // Arrange
             var knockServices = _knockKnockFixture.KnockService;
 
             // Act
-            var result = knockServices.SvrReverseWord(input);
+            var result = await knockServices.SvrReverseWord(input);
 
             // Assert
             Assert.Equal(expected, result);
@@ -90,13 +90,13 @@ namespace KnockKnock.Tests
         [InlineData(2, 3, 5, KnockService.TriangleType.NotATriangle)]
         [InlineData(2, 3, 6, KnockService.TriangleType.NotATriangle)]
         [Trait("Category", "Triangle Type")]
-        public void SrvTriangleType_ReturnExpectedValue_WhenIndexIsInlineData(int sideA, int sideB, int sideC, KnockService.TriangleType expected)
+        public async void SrvTriangleType_ReturnExpectedValue_WhenIndexIsInlineData(int sideA, int sideB, int sideC, KnockService.TriangleType expected)
         {
             // Arrange
             var knockServices = _knockKnockFixture.KnockService;
 
             // Act
-            var result = knockServices.SrvTriangleType(sideA, sideB, sideC);
+            var result = await knockServices.SrvTriangleType(sideA, sideB, sideC);
 
             // Assert
             Assert.Equal(expected, result);

@@ -20,13 +20,13 @@ namespace KnockKnock.Tests
 
         [Fact]
         [Trait("Category", "Integration-Fibonacci")]
-        public void GetFibonacciNumber_ReturnStatus200_WhenIndexIsPositive()
+        public async void GetFibonacciNumber_ReturnStatus200_WhenIndexIsPositive()
         {
             //Arrange
             var request = new HttpRequestMessage(new HttpMethod("GET"), "/api/v1/Fibonacci?n=8");
             
             //Act
-            var response = _client.SendAsync(request).Result;
+            var response = await _client.SendAsync(request);
 
             //Assert
             Assert.Equal(HttpStatusCode.OK, response.StatusCode);
@@ -34,13 +34,13 @@ namespace KnockKnock.Tests
 
         [Fact]
         [Trait("Category", "Integration-Fibonacci")]
-        public void GetFibonacciNumber_ReturnStatus422_WhenIndexIsNegative()
+        public async void GetFibonacciNumber_ReturnStatus422_WhenIndexIsNegative()
         {
             //Arrange
             var request = new HttpRequestMessage(new HttpMethod("GET"), "/api/v1/Fibonacci?n=-8");
 
             //Act
-            var response = _client.SendAsync(request).Result;
+            var response = await _client.SendAsync(request);
 
             //Assert
             Assert.Equal(HttpStatusCode.UnprocessableEntity, response.StatusCode);
@@ -48,14 +48,14 @@ namespace KnockKnock.Tests
 
         [Fact]
         [Trait("Category", "Integration-Fibonacci")]
-        public void GetFibonacciNumber_ReturnStatus406_WhenAcceptHeaderIsNotJson()
+        public async void GetFibonacciNumber_ReturnStatus406_WhenAcceptHeaderIsNotJson()
         {
             //Arrange
             var request = new HttpRequestMessage(new HttpMethod("GET"), "/api/v1/Fibonacci?n=-8");
             _client.DefaultRequestHeaders.Add("Accept", "application/xml");
 
             //Act
-            var response = _client.SendAsync(request).Result;
+            var response = await _client.SendAsync(request);
 
             //Assert
             Assert.Equal(HttpStatusCode.NotAcceptable, response.StatusCode);
@@ -63,14 +63,14 @@ namespace KnockKnock.Tests
 
         [Fact]
         [Trait("Category", "Integration-Fibonacci")]
-        public void GetFibonacciNumber_ReturnStatus400_WhenIndexIsInvalidType()
+        public async void GetFibonacciNumber_ReturnStatus400_WhenIndexIsInvalidType()
         {
             //Arrange
             var request = new HttpRequestMessage(new HttpMethod("GET"), "/api/v1/Fibonacci?n=test");
             _client.DefaultRequestHeaders.Add("Accept", "application/json");
 
             //Act
-            var response = _client.SendAsync(request).Result;
+            var response = await _client.SendAsync(request);
 
             //Assert
             Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);
@@ -78,13 +78,13 @@ namespace KnockKnock.Tests
 
         [Fact]
         [Trait("Category", "Integration-ReverseWords")]
-        public void GetReverseWords_ReturnStatus200_WhenSentenceIsString()
+        public async void GetReverseWords_ReturnStatus200_WhenSentenceIsString()
         {
             //Arrange
             var request = new HttpRequestMessage(new HttpMethod("GET"), "/api/v1/ReverseWords?sentence=test");
 
             //Act
-            var response = _client.SendAsync(request).Result;
+            var response = await _client.SendAsync(request);
 
             //Assert
             Assert.Equal(HttpStatusCode.OK, response.StatusCode);
@@ -92,13 +92,13 @@ namespace KnockKnock.Tests
 
         [Fact]
         [Trait("Category", "Integration-ReverseWords")]
-        public void GetReverseWords_ReturnStatus422_WhenSentenceIsNull()
+        public async void GetReverseWords_ReturnStatus422_WhenSentenceIsNull()
         {
             //Arrange
             var request = new HttpRequestMessage(new HttpMethod("GET"), "/api/v1/ReverseWords");
 
             //Act
-            var response = _client.SendAsync(request).Result;
+            var response = await _client.SendAsync(request);
 
             //Assert
             Assert.Equal(HttpStatusCode.UnprocessableEntity, response.StatusCode);
@@ -106,14 +106,14 @@ namespace KnockKnock.Tests
 
         [Fact]
         [Trait("Category", "Integration-ReverseWords")]
-        public void GetReverseWords_ReturnStatus406_WhenAcceptHeaderIsNotJson()
+        public async void GetReverseWords_ReturnStatus406_WhenAcceptHeaderIsNotJson()
         {
             //Arrange
             var request = new HttpRequestMessage(new HttpMethod("GET"), "/api/v1/ReverseWords?sentence=test");
             _client.DefaultRequestHeaders.Add("Accept", "application/xml");
 
             //Act
-            var response = _client.SendAsync(request).Result;
+            var response = await _client.SendAsync(request);
 
             //Assert
             Assert.Equal(HttpStatusCode.NotAcceptable, response.StatusCode);
@@ -121,14 +121,14 @@ namespace KnockKnock.Tests
 
         [Fact]
         [Trait("Category", "Integration-ReverseWords")]
-        public void GetReverseWords_ReturnStatus400_WhenSentenceIsEmpty()
+        public async void GetReverseWords_ReturnStatus400_WhenSentenceIsEmpty()
         {
             //Arrange
             var request = new HttpRequestMessage(new HttpMethod("GET"), "/api/v1/ReverseWords?sentence=");
             _client.DefaultRequestHeaders.Add("Accept", "application/json");
 
             //Act
-            var response = _client.SendAsync(request).Result;
+            var response = await _client.SendAsync(request);
 
             //Assert
             Assert.Equal(HttpStatusCode.UnprocessableEntity, response.StatusCode);
@@ -136,13 +136,13 @@ namespace KnockKnock.Tests
 
         [Fact]
         [Trait("Category", "Integration-TriangleType")]
-        public void GetTriangleType_ReturnStatus200_WhenAllParametersAreSend()
+        public async void GetTriangleType_ReturnStatus200_WhenAllParametersAreSend()
         {
             //Arrange
             var request = new HttpRequestMessage(new HttpMethod("GET"), "/api/v1/TriangleType?a=2&b=2&c=2");
 
             //Act
-            var response = _client.SendAsync(request).Result;
+            var response = await _client.SendAsync(request);
 
             //Assert
             Assert.Equal(HttpStatusCode.OK, response.StatusCode);
@@ -150,13 +150,13 @@ namespace KnockKnock.Tests
 
         [Fact]
         [Trait("Category", "Integration-TriangleType")]
-        public void GetTriangleType_ReturnStatus400_WhenParameterIsMissing()
+        public async void GetTriangleType_ReturnStatus400_WhenParameterIsMissing()
         {
             //Arrange
             var request = new HttpRequestMessage(new HttpMethod("GET"), "/api/v1/TriangleType?a=test");
 
             //Act
-            var response = _client.SendAsync(request).Result;
+            var response = await _client.SendAsync(request);
 
             //Assert
             Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);

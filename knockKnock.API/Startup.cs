@@ -53,6 +53,7 @@ namespace knockKnock.API
                 }
             }).SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
 
+            services.AddResponseCaching();
 
             services.Configure<ApiBehaviorOptions>(options =>
             {
@@ -164,6 +165,8 @@ namespace knockKnock.API
                 // The default HSTS value is 30 days. For production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+
+            app.UseResponseCaching();
 
             app.UseHttpsRedirection();
 

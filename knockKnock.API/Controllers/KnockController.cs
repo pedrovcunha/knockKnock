@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using knockKnock.API.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -28,11 +29,15 @@ namespace knockKnock.API.Controllers
         [HttpGet]
         [Route("Fibonacci")]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public IActionResult GetFibonacciNumber([FromQuery] long n)
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        public async Task<IActionResult> GetFibonacciNumberAsync([FromQuery] long n)
         {
+            // Over long limit.
+            if (n > 92)
+                return NoContent();
             try
             {
-                var fibonacciNumber = _knockService.SvrFibonacci(n);
+                var fibonacciNumber = await _knockService.SvrFibonacci(n);
                 return Ok(fibonacciNumber);
             }
             catch (Exception)
@@ -49,14 +54,14 @@ namespace knockKnock.API.Controllers
         [HttpGet]
         [Route("ReverseWords")]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public IActionResult GetReverseWords([FromQuery] string sentence)
+        public async Task<IActionResult> GetReverseWordsAsync([FromQuery] string sentence)
         {
             try
             {
-                var reverseSentence = _knockService.SvrReverseWord(sentence);
+                var reverseSentence = await _knockService.SvrReverseWord(sentence);
                 return Ok(reverseSentence);
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 return UnprocessableEntity();
             }
@@ -69,9 +74,9 @@ namespace knockKnock.API.Controllers
         [HttpGet]
         [Route("Token")]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public IActionResult GetToken()
+        public async Task<IActionResult> GetToken()
         {
-            var token = _knockService.SrvToken();
+            var token = await _knockService.SrvToken();
             return Ok(token);
         }
 
@@ -85,9 +90,9 @@ namespace knockKnock.API.Controllers
         [HttpGet]
         [Route("TriangleType")]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public IActionResult GetTriangleType([FromQuery] int a, [FromQuery] int b, [FromQuery] int c)
+        public async Task<IActionResult> GetTriangleType([FromQuery] int a, [FromQuery] int b, [FromQuery] int c)
         {
-            var triangleType = _knockService.SrvTriangleType(a, b, c);
+            var triangleType = await _knockService.SrvTriangleType(a, b, c);
             
             return Ok(Enum.GetName(typeof(KnockService.TriangleType),triangleType));
         }
