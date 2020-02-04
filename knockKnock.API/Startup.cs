@@ -3,6 +3,7 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using knockKnock.API.Services;
+using knockKnock.API.Services.Contracts;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -81,7 +82,10 @@ namespace knockKnock.API
                 setupAction.SubstituteApiVersionInUrl = true;
             });
 
-            services.AddScoped<IKnockService, KnockService>();
+            services.AddScoped<ITokenService, TokenService>();
+            services.AddScoped<IFibonacciService, FibonacciService>();
+            services.AddScoped<IReverseWordService, ReverseWordService>();
+            services.AddScoped<ITriangleTypeService, TriangleTypeService>();
 
             services.AddApiVersioning(setupAction =>
             {

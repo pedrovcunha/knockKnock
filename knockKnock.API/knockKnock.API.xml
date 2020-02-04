@@ -4,27 +4,27 @@
         <name>knockKnock.API</name>
     </assembly>
     <members>
-        <member name="M:knockKnock.API.Controllers.KnockController.GetFibonacciNumberAsync(System.Int64)">
+        <member name="M:knockKnock.API.Controllers.FibonacciController.GetFibonacciNumberAsync(System.Int64)">
             <summary>
             Get the nth number in the fibonacci sequence.
             </summary>
             <param name="n">The index (n) of the fibonacci sequence</param>
             <returns>Returns the nth Fibonacci number.</returns>
         </member>
-        <member name="M:knockKnock.API.Controllers.KnockController.GetReverseWordsAsync(System.String)">
+        <member name="M:knockKnock.API.Controllers.ReverseWordsController.GetReverseWordsAsync(System.String)">
             <summary>
             Get the Reverse Words
             </summary>
             <param name="sentence">Sequence of characters to be reverse (Phrase/Sentence).</param>
             <returns>Reverses the letters of each word in a sentence.</returns>
         </member>
-        <member name="M:knockKnock.API.Controllers.KnockController.GetToken">
+        <member name="M:knockKnock.API.Controllers.TokenController.GetToken">
             <summary>
             Gets my personal token.
             </summary>
             <returns>My Token</returns>
         </member>
-        <member name="M:knockKnock.API.Controllers.KnockController.GetTriangleType(System.Int32,System.Int32,System.Int32)">
+        <member name="M:knockKnock.API.Controllers.TriangleTypeController.GetTriangleType(System.Int32,System.Int32,System.Int32)">
             <summary>
             Get the type of triangle given the lengths of its sides.
             </summary>

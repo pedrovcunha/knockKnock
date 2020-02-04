@@ -162,6 +162,20 @@ namespace KnockKnock.Tests
             Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);
         }
 
+        [Fact]
+        [Trait("Category", "Integration-TriangleType")]
+        public async void GetTriangleType_ReturnStatus400_WhenParameterWrongType()
+        {
+            //Arrange
+            var request = new HttpRequestMessage(new HttpMethod("GET"), "/api/v1/TriangleType?a=test&b=8&c=8");
+
+            //Act
+            var response = await _client.SendAsync(request);
+
+            //Assert
+            Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);
+        }
+
 
         public void Dispose()
         {
