@@ -29,20 +29,16 @@ namespace knockKnock.API.Controllers
         [HttpGet]
         //[Route("Fibonacci")]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status204NoContent)]
         public async Task<IActionResult> GetFibonacciNumberAsync([FromQuery] long n)
         {
-            // Over long limit.
-            if (n > 92)
-                return NoContent();
             try
             {
                 var fibonacciNumber = await _fibonacciService.SvrFibonacci(n);
                 return Ok(fibonacciNumber);
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                return UnprocessableEntity();
+                return BadRequest(e.Message);
             }
         }
     }

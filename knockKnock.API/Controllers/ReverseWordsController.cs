@@ -36,9 +36,9 @@ namespace knockKnock.API.Controllers
                 var reverseSentence = await _reverseWordService.SvrReverseWord(sentence);
                 return Ok(reverseSentence);
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                return UnprocessableEntity();
+                return BadRequest(e.Message);
             }
         }
 

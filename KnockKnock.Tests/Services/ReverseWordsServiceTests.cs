@@ -19,7 +19,8 @@ namespace KnockKnock.Tests.Services
         [Theory]
         [InlineData("Test01", "10tseT")]
         [InlineData("reverse the word", "esrever eht drow")]
-        [Trait("Category", "Reverse Word")]
+        [InlineData("", "")]
+        [Trait("Category", "Reverse Words")]
         public async void SvrReverseWord_ReturnExpectedValue_WhenIndexIsInlineData(string input, string expected)
         {
             // Arrange
@@ -30,6 +31,17 @@ namespace KnockKnock.Tests.Services
 
             // Assert
             Assert.Equal(expected, result);
+        }
+
+        [Fact]
+        [Trait("Category", "Reverse Words")]
+        public async System.Threading.Tasks.Task SvrReverseWord_ThrowArgumentException_WhenSentenceIsNull()
+        {
+            // Arrange
+            var reverseWordService = _reverseWordFixture.ReverseWordService;
+
+            // Act & Assert
+            await Assert.ThrowsAsync<ArgumentNullException>(() => reverseWordService.SvrReverseWord(null));
         }
         public void Dispose()
         {

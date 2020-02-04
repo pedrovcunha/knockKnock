@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using knockKnock.API.Services.Contracts;
 
+
 namespace knockKnock.API.Services
 {
     public class FibonacciService : IFibonacciService
@@ -19,12 +20,14 @@ namespace knockKnock.API.Services
 
         public Task<long> SvrFibonacci(long index)
         {
-            if (index < 0)
+            if (index < -92 || index > 92)
             {
                 throw new ArgumentException(
-                    $"The Fibonacci sequence starts from zero onwards. Therefore the value of {index} is not acceptable.",
+                    $"The value of {index} is not acceptable. (Long data-type overflow)",
                     nameof(index));
             }
+
+            var nth = Math.Abs(index);
 
             if (index == 0)
                 return Task.FromResult<long>(0);
@@ -40,9 +43,16 @@ namespace knockKnock.API.Services
 
                 counter++;
 
-            } while (counter < index);
+            } while (counter < nth);
 
-            return Task.FromResult<long>(n2);
+            // https://en.wikipedia.org/wiki/Generalizations_of_Fibonacci_numbers - Extension to negative integers
+            if (index < 0 && (index % 2 == 0))
+            {
+                n2 = -n2;
+            }
+
+            return Task.FromResult(n2);
         }
+
     }
 }

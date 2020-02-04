@@ -36,11 +36,19 @@ namespace KnockKnock.Tests.Services
         }
 
         [Theory]
+        [InlineData(-6, -8)]
+        [InlineData(-5, 5)]
+        [InlineData(-7, 13)]
         [InlineData(0, 0)]
         [InlineData(1, 1)]
         [InlineData(2, 1)]
         [InlineData(3, 2)]
         [InlineData(10, 55)]
+        [InlineData(41, 165580141)]
+        [InlineData(53, 53316291173)]
+        [InlineData(65, 17167680177565)]
+        [InlineData(82, 61305790721611591)]
+        [InlineData(91, 4660046610375530309)]
         [Trait("Category", "Fibonacci")]
         public async void SrvFibonacci_ReturnExpectedValue_WhenIndexIsInlineData(long index, long expected)
         {
@@ -56,13 +64,14 @@ namespace KnockKnock.Tests.Services
 
         [Fact]
         [Trait("Category", "Fibonacci")]
-        public async System.Threading.Tasks.Task SrvFibonacci_ThrowArgumentException_WhenIndexIsNegative()
+        public async System.Threading.Tasks.Task SrvFibonacci_ThrowArgumentException_WhenIndexOverflow()
         {
             // Arrange
             var fibonacciServices = _fibonacciFixture.FibonacciService;
 
             // Act & Assert
             await Assert.ThrowsAsync<ArgumentException>(() => fibonacciServices.SvrFibonacci(long.MinValue));
+            await Assert.ThrowsAsync<ArgumentException>(() => fibonacciServices.SvrFibonacci(93));
         }
 
         public void Dispose()
