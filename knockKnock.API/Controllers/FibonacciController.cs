@@ -3,7 +3,6 @@ using System.Threading.Tasks;
 using knockKnock.API.Services.Contracts;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 
 namespace knockKnock.API.Controllers
 {
@@ -12,12 +11,10 @@ namespace knockKnock.API.Controllers
     [ApiController]
     public class FibonacciController : Controller
     {
-        private readonly ILogger<FibonacciController> _logger;
         private readonly IFibonacciService _fibonacciService;
 
-        public FibonacciController(ILogger<FibonacciController> logger, IFibonacciService fibonacciService)
+        public FibonacciController(IFibonacciService fibonacciService)
         {
-            _logger = logger;
             _fibonacciService = fibonacciService;
         }
 

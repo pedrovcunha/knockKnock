@@ -3,7 +3,6 @@ using System.Threading.Tasks;
 using knockKnock.API.Services.Contracts;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 
 namespace knockKnock.API.Controllers
 {
@@ -12,12 +11,10 @@ namespace knockKnock.API.Controllers
     [ApiController] 
     public class ReverseWordsController : ControllerBase
     {
-        private readonly ILogger<ReverseWordsController> _logger;
         private readonly IReverseWordService _reverseWordService;
 
-        public ReverseWordsController(ILogger<ReverseWordsController> logger, IReverseWordService reverseWordService)
+        public ReverseWordsController(IReverseWordService reverseWordService)
         {
-            _logger = logger;
             _reverseWordService = reverseWordService;
         }
 

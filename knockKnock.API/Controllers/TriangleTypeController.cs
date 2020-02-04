@@ -4,7 +4,6 @@ using knockKnock.API.Models;
 using knockKnock.API.Services.Contracts;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 
 namespace knockKnock.API.Controllers
 {
@@ -13,12 +12,10 @@ namespace knockKnock.API.Controllers
     [ApiController]
     public class TriangleTypeController : ControllerBase
     {
-        private readonly ILogger<TriangleTypeController> _logger;
         private readonly ITriangleTypeService _triangleTypeService;
 
-        public TriangleTypeController(ILogger<TriangleTypeController> logger, ITriangleTypeService triangleTypeService)
+        public TriangleTypeController(ITriangleTypeService triangleTypeService)
         {
-            _logger = logger;
             _triangleTypeService = triangleTypeService;
         }
 

@@ -2,7 +2,6 @@
 using knockKnock.API.Services.Contracts;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 
 namespace knockKnock.API.Controllers
 {
@@ -11,12 +10,10 @@ namespace knockKnock.API.Controllers
     [ApiController]
     public class TokenController : ControllerBase
     {
-        private readonly ILogger<TokenController> _logger;
         private readonly ITokenService _tokenService;
 
-        public TokenController(ILogger<TokenController> logger, ITokenService tokenService)
+        public TokenController(ITokenService tokenService)
         {
-            _logger = logger;
             _tokenService = tokenService;
         }
 
