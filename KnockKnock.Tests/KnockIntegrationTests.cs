@@ -34,7 +34,7 @@ namespace KnockKnock.Tests
 
         [Fact]
         [Trait("Category", "Integration-Fibonacci")]
-        public async void GetFibonacciNumber_ReturnStatus422_WhenIndexIsNegative()
+        public async void GetFibonacciNumber_ReturnStatus200_WhenIndexIsNegative()
         {
             //Arrange
             var request = new HttpRequestMessage(new HttpMethod("GET"), "/api/v1/Fibonacci?n=-8");
@@ -43,7 +43,7 @@ namespace KnockKnock.Tests
             var response = await _client.SendAsync(request);
 
             //Assert
-            Assert.Equal(HttpStatusCode.UnprocessableEntity, response.StatusCode);
+            Assert.Equal(HttpStatusCode.OK, response.StatusCode);
         }
 
         [Fact]
@@ -92,16 +92,16 @@ namespace KnockKnock.Tests
 
         [Fact]
         [Trait("Category", "Integration-ReverseWords")]
-        public async void GetReverseWords_ReturnStatus422_WhenSentenceIsNull()
+        public async void GetReverseWords_ReturnStatus400_WhenSentenceIsNull()
         {
             //Arrange
-            var request = new HttpRequestMessage(new HttpMethod("GET"), "/api/v1/ReverseWords");
+            var request = new HttpRequestMessage(new HttpMethod("GET"), "/api/v1/ReverseWords?sentence=");
 
             //Act
             var response = await _client.SendAsync(request);
 
             //Assert
-            Assert.Equal(HttpStatusCode.UnprocessableEntity, response.StatusCode);
+            Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);
         }
 
         [Fact]
@@ -121,17 +121,17 @@ namespace KnockKnock.Tests
 
         [Fact]
         [Trait("Category", "Integration-ReverseWords")]
-        public async void GetReverseWords_ReturnStatus400_WhenSentenceIsEmpty()
+        public async void GetReverseWords_ReturnStatus200_WhenSentenceIsEmpty()
         {
             //Arrange
-            var request = new HttpRequestMessage(new HttpMethod("GET"), "/api/v1/ReverseWords?sentence=");
+            var request = new HttpRequestMessage(new HttpMethod("GET"), "/api/v1/ReverseWords?sentence=\"\"");
             _client.DefaultRequestHeaders.Add("Accept", "application/json");
 
             //Act
             var response = await _client.SendAsync(request);
 
             //Assert
-            Assert.Equal(HttpStatusCode.UnprocessableEntity, response.StatusCode);
+            Assert.Equal(HttpStatusCode.OK, response.StatusCode);
         }
 
         [Fact]
