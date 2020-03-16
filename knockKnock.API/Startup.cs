@@ -155,6 +155,21 @@ namespace knockKnock.API
 
                 setupAction.IncludeXmlComments(xmlCommentFullPAth);
             });
+
+            //services.AddHsts(options =>
+            //{
+            //    options.Preload = true;
+            //    options.IncludeSubDomains = true;
+            //    options.MaxAge = TimeSpan.FromDays(60);
+            //    //options.ExcludedHosts.Add("example.com");
+            //    //options.ExcludedHosts.Add("www.example.com");
+            //});
+
+            //services.AddHttpsRedirection(options =>
+            //{
+            //    options.RedirectStatusCode = StatusCodes.Status307TemporaryRedirect;
+            //    options.HttpsPort = 5001;
+            //});
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -167,12 +182,17 @@ namespace knockKnock.API
             else
             {
                 // The default HSTS value is 30 days. For production scenarios, see https://aka.ms/aspnetcore-hsts.
-                app.UseHsts();
+                if (env.IsStaging() || env.IsProduction())
+                {
+                    app.UseExceptionHandler("/Error");
+                    //app.UseHsts();
+                }
+                    
             }
 
             app.UseResponseCaching();
 
-            app.UseHttpsRedirection();
+            //app.UseHttpsRedirection();
 
             // Adds Swashbuckle - Always after UseHttpsRedirection (Ensures that any call to a non-encrypted OpenAPI endpoint will be redirected to the encrypted version.
             app.UseSwagger();
